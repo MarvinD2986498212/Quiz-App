@@ -1,5 +1,0 @@
-Uner-agent: *
-Disallow: /Impressum.html
-Disallow: /Datenschutz.html
-Disallow: /AGB.html
-Disallow: /Wiederrufsrecht.html
