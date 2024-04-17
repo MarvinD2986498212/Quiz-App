@@ -1,0 +1,4 @@
+	<head>
+		<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="b1b77f95-dac6-4fbe-8b07-830b64e5254d" data-blockingmode="auto" type="text/javascript">
+		</script>
+	</head>
