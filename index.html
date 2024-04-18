@@ -12,45 +12,53 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 </head>
-<body>
+<body onload="init()">
     
-    <nav class="navbar bg-body-tertiary">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Quiz App</a>
-        </div>
-    </nav>
+  <nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Quiz App</a>
+    </div>
+  </nav>
 
-    <div class="container">
-        <div class="card" style="width: 18rem;">
-            <img src=".img/card-background.jpg" class="card-img-top">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+  <div class="container">
+    <div class="card quiz-card">
+      <img src="./img/card-background.jpg" class="card-img-top">
+      <div id="Questions">
+          <div class="card-body">
+            <h5 class="card-title" id="questiontext"></h5>
+          </div>
+          <div class="card quiz-answer-card m-2">
+            <div class="card-body" id="answer_1"  onclick="answer('answer_1')">
             </div>
           </div>
-    </div>
 
-    <div class="card">
-      <div class="card-body">
-        This is some text within a card body.
+          <div class="card quiz-answer-card m-2">
+            <div class="card-body" id="answer_2" onclick="answer('answer_2')">
+            </div>
+          </div>
+
+          <div class="card quiz-answer-card m-2">
+            <div class="card-body" id="answer_3" onclick="answer('answer_3')">
+            </div>
+          </div>
+
+          <div class="card quiz-answer-card m-2">
+            <div class="card-body" id="answer_4"  onclick="answer('answer_4')">
+            </div>
+          </div>
+        </div>
+
+        <div class="question-footer m-4">
+          <div>
+            <b id="current-question"></b> von <b id="question-lenght"></b> Fragen 
+          </div>
+
+        <button onclick="nextquestion()" class="btn btn-primary" id="next-button" disabled>Nächste Frage</button>
       </div>
     </div>
-    <div class="card">
-      <div class="card-body">
-        This is some text within a card body.
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-body">
-        This is some text within a card body.
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-body">
-        This is some text within a card body.
-      </div>
-    </div>
+  </div>
+   
+   
 
 </body>
 </html>

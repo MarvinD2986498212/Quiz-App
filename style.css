@@ -9,3 +9,28 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+.quiz-card {
+    width: 30rem;
+}
+
+.question-footer {
+    border-top: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+}
+
+.quiz-answer-card:hover {
+    cursor: pointer;
+    background-color: rgba(215, 215, 215, 0.466);
+}
+
+.right-answer {
+    background-color: #5adb5a !important;
+}
+
+.false-answer {
+    background-color: #e200006d !important;
+}
