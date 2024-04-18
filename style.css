@@ -14,6 +14,10 @@ body {
     width: 30rem;
 }
 
+.hover {
+    cursor: pointer;
+}
+
 .question-footer {
     border-top: 1px solid black;
     display: flex;
@@ -33,4 +37,16 @@ body {
 
 .false-answer {
     background-color: #e200006d !important;
+}
+
+.cup {
+    width: 150px;
+    height: 100px;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

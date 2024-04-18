@@ -34,6 +34,7 @@ let questions = [
 ]
 
 let currentQuestion = 0 ; 
+let Numbercorrectanswers = 0; 
 
 
 function init() {
@@ -45,12 +46,29 @@ function showQuestion() {
     let question = questions[currentQuestion]; 
 
     if (currentQuestion >= questions.length)  {
+
+    //  document.getElementById('next-button').innerHTML = /*HTML*/`
+    //  <div class="hover" onclick="init()" >Von Vorn</div>
+    //  `;
+
         document.getElementById('Questions').innerHTML = /*HTML*/`
-            <div class="fs-1 text-center">Quiz beendet ! </div>
-            <img src="">
+        <div class="center">
+            <div class="fs-1">Quiz beendet ! </div>
+            <img class="cup" src="./img/cup.png">
+            <div class="fs-6">
+                Du hast ${Numbercorrectanswers} Fragen von ${questions.length} richtig beantwortet !
+            </div>
+        </div>
         `; 
     }
     else {
+    let percent = (currentQuestion + 1) / questions.length  ;
+    percent = percent * 100; // wenn krumme Zahlen das Math.round(percent)
+    document.getElementById('progress-bar').innerHTML = `${percent} % `;
+    document.getElementById('progress-bar').style = `width: ${percent}%;`  ;
+
+    console.log(percent)
+
     document.getElementById('current-question').innerHTML = currentQuestion + 1;
     document.getElementById('questiontext').innerHTML = question['question'];
     document.getElementById('answer_1').innerHTML = question['answer_1'];
@@ -70,6 +88,7 @@ function answer(answer) {
 
     if(answerNumber == rightAnswerNumber){
         rightCard.parentNode.classList.add('right-answer');
+        Numbercorrectanswers++;
     }
     else {
         rightCard.parentNode.classList.add('right-answer');
