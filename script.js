@@ -34,7 +34,9 @@ let questions = [
 ]
 
 let currentQuestion = 0 ; 
-let Numbercorrectanswers = 0; 
+let NumberCorrectAnswers = 0; 
+let audioSucces = new Audio('audio/succes.mp3') ;
+let audiFail = new Audio('audio/wrong.mp3') ;
 
 
 function init() {
@@ -43,61 +45,52 @@ function init() {
 }
 
 function showQuestion() {
-    let question = questions[currentQuestion]; 
+    let question = questions[currentQuestion];
 
-    if (currentQuestion >= questions.length)  {
-
-    //  document.getElementById('next-button').innerHTML = /*HTML*/`
-    //  <div class="hover" onclick="init()" >Von Vorn</div>
-    //  `;
-
-        document.getElementById('Questions').innerHTML = /*HTML*/`
-        <div class="center">
-            <div class="fs-1">Quiz beendet ! </div>
-            <img class="cup" src="./img/cup.png">
-            <div class="fs-6">
-                Du hast ${Numbercorrectanswers} Fragen von ${questions.length} richtig beantwortet !
-            </div>
-        </div>
-        `; 
+    if (gameIsOver())  {
+        shwoendscreen();
     }
     else {
-    let percent = (currentQuestion + 1) / questions.length  ;
-    percent = percent * 100; // wenn krumme Zahlen das Math.round(percent)
-    document.getElementById('progress-bar').innerHTML = `${percent} % `;
-    document.getElementById('progress-bar').style = `width: ${percent}%;`  ;
-
-    console.log(percent)
-
-    document.getElementById('current-question').innerHTML = currentQuestion + 1;
-    document.getElementById('questiontext').innerHTML = question['question'];
-    document.getElementById('answer_1').innerHTML = question['answer_1'];
-    document.getElementById('answer_2').innerHTML = question['answer_2'];
-    document.getElementById('answer_3').innerHTML = question['answer_3'];
-    document.getElementById('answer_4').innerHTML = question['answer_4'];
+        showNextQuestion(question);
     }
+}
+
+function gameIsOver() {
+    return currentQuestion >= questions.length;
 }
 
 function answer(answer) {
     let answerNumber = answer.slice(-1);
     let rightAnswerNumber = questions[currentQuestion]['right_answer'];
-    
     let falseCard = document.getElementById(answer)
     let rightCard = document.getElementById(`answer_${rightAnswerNumber}`)
 
-
-    if(answerNumber == rightAnswerNumber){
-        rightCard.parentNode.classList.add('right-answer');
-        Numbercorrectanswers++;
+    if(checkRightAnswer(answerNumber,rightAnswerNumber)){
+        rightAnswer(rightCard)
     }
     else {
-        rightCard.parentNode.classList.add('right-answer');
-        falseCard.parentNode.classList.add('false-answer');
+        falseAnswer(rightCard,falseCard);
     }
     document.getElementById('next-button').disabled = false ;
 }
 
-function resetanswer(){
+function checkRightAnswer(answerNumber,rightAnswerNumber) {
+   return answerNumber == rightAnswerNumber
+}
+
+function rightAnswer(rightCard) {
+    rightCard.parentNode.classList.add('right-answer');
+        audioSucces.play();
+        NumberCorrectAnswers++;
+}
+
+function falseAnswer(rightCard,falseCard) {
+    rightCard.parentNode.classList.add('right-answer');
+    audiFail.play();
+    falseCard.parentNode.classList.add('false-answer');
+}
+
+function resetAnswerColor(){
     document.getElementById('answer_1').parentNode.classList.remove('right-answer');
     document.getElementById('answer_1').parentNode.classList.remove('false-answer');
     document.getElementById('answer_2').parentNode.classList.remove('right-answer');
@@ -108,9 +101,45 @@ function resetanswer(){
     document.getElementById('answer_4').parentNode.classList.remove('false-answer');
 }
 
-function nextquestion() {
+function nextQuestion() {
     currentQuestion ++;
     document.getElementById('next-button').disabled = true ;
     showQuestion(); 
-    resetanswer();
+    resetAnswerColor();
+}
+
+function ResetQuestions() {
+    currentQuestion = 0;
+    NumberCorrectAnswers = 0;
+    init();
+    document.getElementById('Questions').classList.remove('d-none');
+    document.getElementById('center').classList.add('d-none');
+    document.getElementById('rest-button').classList.add('d-none');
+    document.getElementById('next-button').classList.remove('d-none');
+    document.getElementById('question-Counter').classList.remove('d-none');
+    document.getElementById('question-footer').classList.remove('middle');
+}
+
+function shwoendscreen() {
+    document.getElementById('rest-button').classList.remove('d-none');
+    document.getElementById('next-button').classList.add('d-none');
+    document.getElementById('question-Counter').classList.add('d-none');
+    document.getElementById('question-footer').classList.add('middle');
+    document.getElementById('Questions').classList.add('d-none');
+    document.getElementById('center').classList.remove('d-none');
+    document.getElementById('nuber-current-answer').innerHTML= `${NumberCorrectAnswers}` ;
+    document.getElementById('questions-lenght').innerHTML= `${questions.length}` ;
+}
+
+function showNextQuestion(question) {
+    let percent = (currentQuestion + 1) / questions.length  ;
+    percent = percent * 100; // wenn krumme Zahlen das Math.round(percent)
+    document.getElementById('progress-bar').innerHTML = `${percent} % `;
+    document.getElementById('progress-bar').style = `width: ${percent}%;`  ;
+    document.getElementById('current-question').innerHTML = currentQuestion + 1;
+    document.getElementById('questiontext').innerHTML = question['question'];
+    document.getElementById('answer_1').innerHTML = question['answer_1'];
+    document.getElementById('answer_2').innerHTML = question['answer_2'];
+    document.getElementById('answer_3').innerHTML = question['answer_3'];
+    document.getElementById('answer_4').innerHTML = question['answer_4'];
 }

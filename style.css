@@ -50,3 +50,13 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+.d-none {
+    display: none;
+}
+
+.middle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
